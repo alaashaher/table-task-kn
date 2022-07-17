@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'table-task';
+
+  StudentsArr = [{
+    name: "alaa",
+    email: "alaashaher12@gmail.com",
+    age: 27
+  }];
+
+
 }

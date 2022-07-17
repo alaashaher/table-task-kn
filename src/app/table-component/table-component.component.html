@@ -1,1 +1,25 @@
-<p>table-component works!</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+
+
+    <th>name</th>
+    <th>email</th>
+    <th>age</th>
+</tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of StudentsArr">
+      <td>
+        {{ item.name }}
+      </td>
+
+      <td>
+        {{ item.email }}
+      </td>
+      <td>
+        {{ item.age }}
+      </td>
+    </tr>
+  </tbody>
+</table>
