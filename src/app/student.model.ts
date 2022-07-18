@@ -3,4 +3,5 @@ export default interface Student {
   name: string,
   email: string,
   age: string,
+  isDeleted: boolean
 }

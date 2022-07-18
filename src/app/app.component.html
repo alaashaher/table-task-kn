@@ -1,8 +1,8 @@
-<button type="button" class="btn btn-primary" (click)="openModal(template)">
+<button type="button" class="btn btn-primary" (click)="openModal()">
   add student
 </button>
 
-<ng-template #template>
+<!-- <ng-template #template>
   <div class="modal-body">
     <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
       <div>
@@ -34,6 +34,6 @@
       </button>
     </form>
   </div>
-</ng-template>
+</ng-template> -->
 
 <app-table-component [StudentsArr]="StudentsArr"></app-table-component>

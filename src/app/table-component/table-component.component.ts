@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Student from '../student.model';
@@ -8,7 +8,7 @@ import Student from '../student.model';
   templateUrl: './table-component.component.html',
   styleUrls: ['./table-component.component.css'],
 })
-export class TableComponentComponent implements OnInit {
+export class TableComponentComponent implements OnInit, OnChanges {
   @Input('StudentsArr') StudentsArr: Student[];
 
   studentForm = new FormGroup({
@@ -18,6 +18,9 @@ export class TableComponentComponent implements OnInit {
   });
 
   ngOnInit(): void {}
+  ngOnChanges(changes: SimpleChanges): void {
+    debugger
+  }
   currentStudent: Student;
   modalRef?: BsModalRef;
   constructor(private modalService: BsModalService) {}
@@ -33,9 +36,21 @@ export class TableComponentComponent implements OnInit {
     this.currentStudent = item;
   }
   deleteItem(id: any) {
-    this.StudentsArr = this.StudentsArr.filter((item) => item.id != id);
+    this.StudentsArr = this.StudentsArr.filter((student) => student.id != id);
   }
+  
+  deleteToggle(item: Student) {
+    this.StudentsArr = this.StudentsArr.map((p) =>
+      p.id === item.id
+        ? {
+            ...p,
+            isDeleted: !item.isDeleted,
+          }
+        : p
+    );
+  console.log("this.StudentsArr ", this.StudentsArr );
 
+  }
   onSubmit() {
     this.StudentsArr = this.StudentsArr.map((p) =>
       p.id === this.currentStudent.id

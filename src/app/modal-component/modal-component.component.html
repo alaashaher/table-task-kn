@@ -1,0 +1,64 @@
+<!-- <div class="modal-body">
+    <form #ngForm="ngForm" >
+      <div>
+        <input
+          id="name"
+          type="text"
+          [(ngModel)]="studentModal.name"
+
+          placeholder="name"
+        />
+      </div>
+      <div>
+        <input
+          id="email"
+          type="text"
+          [(ngModel)]="studentModal.email"
+        
+          placeholder="email"
+        />
+      </div>
+      <div>
+        <input
+          id="age"
+          type="text"
+          placeholder="age"
+        
+          [(ngModel)]="studentModal.age"
+        />
+      </div>
+
+      <button
+      (click)="save()"
+        class="btn btn-primary"
+      >
+        Submit
+      </button>
+    </form>
+  </div> -->
+<div class="modal-body">
+  <form [formGroup]="studentForm" (ngSubmit)="save()">
+    <div>
+      <input id="name" type="text" formControlName="name" placeholder="name" />
+    </div>
+    <div>
+      <input
+        id="email"
+        type="text"
+        formControlName="email"
+        placeholder="email"
+      />
+    </div>
+    <div>
+      <input id="age" type="text" formControlName="age" placeholder="age" />
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="!studentForm.valid"
+      class="btn btn-primary"
+    >
+      Submit
+    </button>
+  </form>
+</div>

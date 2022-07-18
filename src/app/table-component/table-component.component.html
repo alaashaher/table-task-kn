@@ -8,31 +8,34 @@
       <th>*</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let item of StudentsArr">
-      <td>{{ item.id }}</td>
+
+  <tbody *ngIf="StudentsArr.length > 0">
+    <tr *ngFor="let student of StudentsArr">
       <td>
-        {{ item.name }}
+        <div class="checkbox" (click)="deleteToggle(student)"></div>
+      </td>
+      <td>
+        {{ student.name }}
       </td>
 
       <td>
-        {{ item.email }}
+        {{ student.email }}
       </td>
       <td>
-        {{ item.age }}
+        {{ student.age }}
       </td>
       <td>
         <button
           type="button"
           class="btn btn-primary"
-          (click)="openModal(template, item)"
+          (click)="openModal(template, student)"
         >
           edit student
         </button>
         <button
           type="button"
           class="btn btn-danger"
-          (click)="deleteItem(item.id)"
+          (click)="deleteItem(student.id)"
         >
           delete student
         </button>
@@ -41,6 +44,7 @@
   </tbody>
 </table>
 
+<div *ngIf="StudentsArr.length <= 0">No data</div>
 <ng-template #template>
   <div class="modal-body">
     <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
