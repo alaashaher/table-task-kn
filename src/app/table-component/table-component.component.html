@@ -42,17 +42,35 @@
 </table>
 
 <ng-template #template>
-  
   <div class="modal-body">
-     <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+      <div>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="name"
+        />
+      </div>
+      <div>
+        <input
+          id="email"
+          type="text"
+          formControlName="email"
+          placeholder="email"
+        />
+      </div>
+      <div>
+        <input id="age" type="text" formControlName="age" placeholder="age" />
+      </div>
 
-        <input id="name" type="text" formControlName="name">
-      
-        <input id="email" type="text" formControlName="email">
-        <input id="age" type="text" formControlName="age">
-
-        <button type="submit" [disabled]="!studentForm.valid">Submit</button>
-      </form>
+      <button
+        type="submit"
+        [disabled]="!studentForm.valid"
+        class="btn btn-primary"
+      >
+        Submit
+      </button>
+    </form>
   </div>
-  
 </ng-template>
