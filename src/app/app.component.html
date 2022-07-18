@@ -1,1 +1,19 @@
+<button type="button" class="btn btn-primary" (click)="openModal(template)">add student</button>
+
+<ng-template #template>
+  
+   <div class="modal-body">
+      <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+
+         <input id="name" type="text" formControlName="name">
+       
+         <input id="email" type="text" formControlName="email">
+         <input id="age" type="text" formControlName="age">
+
+         <button type="submit" [disabled]="!studentForm.valid">Submit</button>
+       </form>
+   </div>
+   
+</ng-template>
+
 <app-table-component [StudentsArr]="StudentsArr"></app-table-component>
