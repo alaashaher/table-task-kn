@@ -1,15 +1,16 @@
 <table class="table table-striped">
   <thead>
     <tr>
-
-
-    <th>name</th>
-    <th>email</th>
-    <th>age</th>
-</tr>
+      <th>#</th>
+      <th>name</th>
+      <th>email</th>
+      <th>age</th>
+      <th>*</th>
+    </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of StudentsArr">
+      <td>{{ item.id }}</td>
       <td>
         {{ item.name }}
       </td>
@@ -20,6 +21,38 @@
       <td>
         {{ item.age }}
       </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="openModal(template, item)"
+        >
+          edit student
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteItem(item.id)"
+        >
+          delete student
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
+
+<ng-template #template>
+  
+  <div class="modal-body">
+     <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+
+        <input id="name" type="text" formControlName="name">
+      
+        <input id="email" type="text" formControlName="email">
+        <input id="age" type="text" formControlName="age">
+
+        <button type="submit" [disabled]="!studentForm.valid">Submit</button>
+      </form>
+  </div>
+  
+</ng-template>
