@@ -29,10 +29,10 @@ export class AppComponent implements OnInit {
 
   StudentsArr: Student[] = [
     {
-      id: 'string',
-      name: 'string',
-      email: 'string',
-      age: 'string',
+      id: '1',
+      name: 'alaa',
+      email: 'alaa@gmail.com',
+      age: '27',
       isDeleted: false,
     },
   ];
@@ -43,29 +43,48 @@ export class AppComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  openModal() {
-    this.modalRef = this.modalService.show(ModalComponentComponent);
-    this.modalRef.content.saveEvent.subscribe((data) => {
-      console.log(data);
-      this.StudentsArr.push({
-        ...data,
-        id: Math.floor(Math.random() * 100),
-        isDeleted: false,
-      });
-      this.changeDetectorRef.detectChanges();
+  deleteToggle(item: Student) {
+    this.StudentsArr = this.StudentsArr.map((p) =>
+      p.id === item.id
+        ? {
+            ...p,
+            isDeleted: !item.isDeleted,
+          }
+        : p
+    );
+  }
+
+  openModal(student?, index?) {
+    this.modalRef = this.modalService.show(ModalComponentComponent, {
+      initialState: {
+        studentModal: { student, id: student?.id },
+      },
+    });
+    this.modalRef.content.saveEvent.subscribe((data: any) => {
+      // console.log(data);
+      if (index >= 0) {
+        this.StudentsArr[index] = {
+          ...data,
+          id: student.id,
+          isDeleted: student.isDeleted,
+        };
+      } else {
+        this.StudentsArr = [
+          ...this.StudentsArr,
+          {
+            ...data,
+            id: Math.floor(Math.random() * 100),
+            isDeleted: false,
+          },
+        ];
+      }
       this.modalRef.hide();
     });
   }
 
-  onSubmit() {
-    console.log('in');
-    this.StudentsArr.push({
-      ...this.studentForm.value,
-      id: Math.floor(Math.random() * 100),
-      isDeleted: false,
-    });
-
-    this.modalService.hide(1);
-    console.log('this.StudentsArr', this.StudentsArr);
+  deletedStudent() {
+    this.StudentsArr = this.StudentsArr.filter(
+      (student) => student.isDeleted != true
+    );
   }
 }

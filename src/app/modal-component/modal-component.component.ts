@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-modal-component',
@@ -14,22 +14,30 @@ export class ModalComponentComponent implements OnInit {
     email: string;
   };
   ngForm: NgForm;
-  @Output('saveEvent') saveEvent = new EventEmitter();
-
-  constructor(public bsModalRef: BsModalRef) {}
-
-  ngOnInit(): void {}
-  
-  save() {
-    // this.saveEvent.emit(this.studentModal);  ...this.studentForm.value
-    this.saveEvent.emit({...this.studentForm.value});  
-
-  }
-
 
   studentForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
     age: new FormControl(''),
   });
+
+  @Output('saveEvent') saveEvent = new EventEmitter();
+
+  constructor(
+    public bsModalRef: BsModalRef,
+    private bsModalService: BsModalService
+  ) {}
+
+  ngOnInit(): void {
+    const initialState =
+      this.bsModalService.config.initialState['studentModal'];
+    if (initialState && initialState?.student) {
+      this.studentForm.patchValue(initialState?.student);
+    }
+  }
+
+  save() {
+    // this.saveEvent.emit(this.studentModal);  ...this.studentForm.value
+    this.saveEvent.emit({ ...this.studentForm.value });
+  }
 }

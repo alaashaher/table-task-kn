@@ -36,4 +36,55 @@
   </div>
 </ng-template> -->
 
-<app-table-component [StudentsArr]="StudentsArr"></app-table-component>
+<table class="table table-striped">
+   <thead>
+     <tr>
+       <th>#</th>
+       <th>name</th>
+       <th>email</th>
+       <th>age</th>
+       <th>*</th>
+     </tr>
+   </thead>
+ 
+   <tbody *ngIf="StudentsArr.length > 0">
+     <tr *ngFor="let student of StudentsArr;let i = index">
+       <td>
+         <div class="checkbox" (click)="deleteToggle(student)"></div>
+         <input type="checkbox" [checked]="student.isDeleted" (click)="deleteToggle(student)">
+       </td>
+       <td>
+         {{ student.name }}
+       </td>
+ 
+       <td>
+         {{ student.email }}
+       </td>
+       <td>
+         {{ student.age }}
+       </td>
+       <td>
+         <button
+           type="button"
+           class="btn btn-primary"
+           (click)="openModal(student, i)"
+         >
+           edit student
+         </button>
+         <!-- <button
+           type="button"
+           class="btn btn-danger"
+           (click)="deleteItem(student.id)"
+         >
+           delete student
+         </button> -->
+       </td>
+     </tr>
+   </tbody>
+ </table>
+
+ <button type="button" class="btn btn-danger" (click)="deletedStudent()">
+  delete student
+</button>
+
+<!-- <app-table-component [StudentsArr]="StudentsArr"></app-table-component> -->
