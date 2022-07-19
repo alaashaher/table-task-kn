@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, TemplateRef, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  TemplateRef,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Student from '../student.model';
@@ -19,7 +26,7 @@ export class TableComponentComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
-    debugger
+    debugger;
   }
   currentStudent: Student;
   modalRef?: BsModalRef;
@@ -38,7 +45,7 @@ export class TableComponentComponent implements OnInit, OnChanges {
   deleteItem(id: any) {
     this.StudentsArr = this.StudentsArr.filter((student) => student.id != id);
   }
-  
+
   deleteToggle(item: Student) {
     this.StudentsArr = this.StudentsArr.map((p) =>
       p.id === item.id
@@ -48,8 +55,6 @@ export class TableComponentComponent implements OnInit, OnChanges {
           }
         : p
     );
-  console.log("this.StudentsArr ", this.StudentsArr );
-
   }
   onSubmit() {
     this.StudentsArr = this.StudentsArr.map((p) =>

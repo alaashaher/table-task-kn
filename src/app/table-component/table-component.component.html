@@ -12,7 +12,11 @@
   <tbody *ngIf="StudentsArr.length > 0">
     <tr *ngFor="let student of StudentsArr">
       <td>
-        <div class="checkbox" (click)="deleteToggle(student)"></div>
+        <input
+          type="checkbox"
+          [checked]="student.isDeleted"
+          (click)="deleteToggle(student)"
+        />
       </td>
       <td>
         {{ student.name }}

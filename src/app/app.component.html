@@ -2,41 +2,7 @@
   add student
 </button>
 
-<!-- <ng-template #template>
-  <div class="modal-body">
-    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
-      <div>
-        <input
-          id="name"
-          type="text"
-          formControlName="name"
-          placeholder="name"
-        />
-      </div>
-      <div>
-        <input
-          id="email"
-          type="text"
-          formControlName="email"
-          placeholder="email"
-        />
-      </div>
-      <div>
-        <input id="age" type="text" formControlName="age" placeholder="age" />
-      </div>
-
-      <button
-        type="submit"
-        [disabled]="!studentForm.valid"
-        class="btn btn-primary"
-      >
-        Submit
-      </button>
-    </form>
-  </div>
-</ng-template> -->
-
-<table class="table table-striped">
+<!-- <table class="table table-striped">
    <thead>
      <tr>
        <th>#</th>
@@ -50,7 +16,7 @@
    <tbody *ngIf="StudentsArr.length > 0">
      <tr *ngFor="let student of StudentsArr;let i = index">
        <td>
-         <div class="checkbox" (click)="deleteToggle(student)"></div>
+        
          <input type="checkbox" [checked]="student.isDeleted" (click)="deleteToggle(student)">
        </td>
        <td>
@@ -71,20 +37,14 @@
          >
            edit student
          </button>
-         <!-- <button
-           type="button"
-           class="btn btn-danger"
-           (click)="deleteItem(student.id)"
-         >
-           delete student
-         </button> -->
+       
        </td>
      </tr>
    </tbody>
- </table>
+ </table> -->
 
- <button type="button" class="btn btn-danger" (click)="deletedStudent()">
+<app-table-component [StudentsArr]="StudentsArr"></app-table-component>
+
+<!-- <button type="button" class="btn btn-danger" (click)="deletedStudent()">
   delete student
-</button>
-
-<!-- <app-table-component [StudentsArr]="StudentsArr"></app-table-component> -->
+</button> -->
