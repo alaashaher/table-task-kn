@@ -2,49 +2,13 @@
   add student
 </button>
 
-<!-- <table class="table table-striped">
-   <thead>
-     <tr>
-       <th>#</th>
-       <th>name</th>
-       <th>email</th>
-       <th>age</th>
-       <th>*</th>
-     </tr>
-   </thead>
- 
-   <tbody *ngIf="StudentsArr.length > 0">
-     <tr *ngFor="let student of StudentsArr;let i = index">
-       <td>
-        
-         <input type="checkbox" [checked]="student.isDeleted" (click)="deleteToggle(student)">
-       </td>
-       <td>
-         {{ student.name }}
-       </td>
- 
-       <td>
-         {{ student.email }}
-       </td>
-       <td>
-         {{ student.age }}
-       </td>
-       <td>
-         <button
-           type="button"
-           class="btn btn-primary"
-           (click)="openModal(student, i)"
-         >
-           edit student
-         </button>
-       
-       </td>
-     </tr>
-   </tbody>
- </table> -->
+<app-table-component
+  [StudentsArr]="StudentsArr"
+  (toggleDeleteEmitter)="deleteToggle($event)"
+  (editEmitter)="openModal($event.item, $event.index)"
+  (deleteEmitter)="deleteStudent($event)"
+></app-table-component>
 
-<app-table-component [StudentsArr]="StudentsArr"></app-table-component>
-
-<!-- <button type="button" class="btn btn-danger" (click)="deletedStudent()">
+<button type="button" class="btn btn-danger" (click)="deletedManyStudent()">
   delete student
-</button> -->
+</button>

@@ -54,7 +54,8 @@ export class AppComponent implements OnInit {
     );
   }
 
-  openModal(student?, index?) {
+  openModal(student?: any, index?: any) {
+    debugger
     this.modalRef = this.modalService.show(ModalComponentComponent, {
       initialState: {
         studentModal: { student, id: student?.id },
@@ -69,6 +70,7 @@ export class AppComponent implements OnInit {
           isDeleted: student.isDeleted,
         };
       } else {
+        // debugger;
         this.StudentsArr = [
           ...this.StudentsArr,
           {
@@ -82,7 +84,13 @@ export class AppComponent implements OnInit {
     });
   }
 
-  deletedStudent() {
+  deleteStudent(event: any) {
+    this.StudentsArr = this.StudentsArr.filter(
+      (student) => student.id != event.id
+    );
+  }
+
+  deletedManyStudent() {
     this.StudentsArr = this.StudentsArr.filter(
       (student) => student.isDeleted != true
     );

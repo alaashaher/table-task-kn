@@ -29,15 +29,19 @@ export class ModalComponentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    debugger
+
     const initialState =
       this.bsModalService.config.initialState['studentModal'];
     if (initialState && initialState?.student) {
-      this.studentForm.patchValue(initialState?.student);
+      // this.studentForm.patchValue(initialState?.student);
+      this.studentModal = JSON.parse(JSON.stringify( initialState?.student)) //deep copy
     }
+    debugger
   }
 
   save() {
-    // this.saveEvent.emit(this.studentModal);  ...this.studentForm.value
-    this.saveEvent.emit({ ...this.studentForm.value });
+    this.saveEvent.emit(this.studentModal); 
+    // this.saveEvent.emit({ ...this.studentForm.value });
   }
 }

@@ -5,6 +5,8 @@ import {
   TemplateRef,
   OnChanges,
   SimpleChanges,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -17,6 +19,9 @@ import Student from '../student.model';
 })
 export class TableComponentComponent implements OnInit, OnChanges {
   @Input('StudentsArr') StudentsArr: Student[];
+  @Output() deleteEmitter = new EventEmitter();
+  @Output() editEmitter = new EventEmitter();
+  @Output() toggleDeleteEmitter = new EventEmitter();
 
   studentForm = new FormGroup({
     name: new FormControl(''),
@@ -26,48 +31,20 @@ export class TableComponentComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
-    debugger;
+    // debugger;
   }
   currentStudent: Student;
   modalRef?: BsModalRef;
   constructor(private modalService: BsModalService) {}
 
-  openModal(template: TemplateRef<any>, item: Student) {
-    this.modalRef = this.modalService.show(template);
-    console.log('item', item);
-    this.studentForm.setValue({
-      name: item.name,
-      age: item.age,
-      email: item.email,
-    });
-    this.currentStudent = item;
+  openModal(item: Student, index) {
+    this.editEmitter.emit({ item: item, index: index });
   }
   deleteItem(id: any) {
-    this.StudentsArr = this.StudentsArr.filter((student) => student.id != id);
+    this.deleteEmitter.emit({ id: id });
   }
 
   deleteToggle(item: Student) {
-    this.StudentsArr = this.StudentsArr.map((p) =>
-      p.id === item.id
-        ? {
-            ...p,
-            isDeleted: !item.isDeleted,
-          }
-        : p
-    );
-  }
-  onSubmit() {
-    this.StudentsArr = this.StudentsArr.map((p) =>
-      p.id === this.currentStudent.id
-        ? {
-            ...p,
-            name: this.studentForm.value.name,
-            age: this.studentForm.value.age,
-            email: this.studentForm.value.email,
-          }
-        : p
-    );
-
-    this.modalService.hide(1);
+    this.toggleDeleteEmitter.emit(item)
   }
 }
